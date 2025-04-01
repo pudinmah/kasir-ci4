@@ -78,10 +78,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+
                         <li class="nav-item">
-                            <a href="<?= base_url('dashboard') ?>" class="nav-link">
+                            <a href="<?= base_url('dashboard') ?>" class="nav-link <?= $menu == 'dashboard' ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -97,8 +96,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
 
-                        <li class="nav-item menu-is-opening menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item menu-is-opening <?= $menu == 'menu-open' ? 'active' : '' ?>">
+                            <a href="#" class="nav-link <?= $menu == 'masterdata' ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Master Data
@@ -109,26 +108,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <ul class="nav nav-treeview" style="display: block;">
 
                                 <li class="nav-item">
-                                    <a href="<?= base_url('produk') ?>" class="nav-link">
-                                        <i class="nav-icon fas fa-user"></i>
+                                    <a href="<?= base_url('produk') ?>" class="nav-link <?= $submenu == 'produk' ? 'active' : '' ?>">
+                                        <i class="nav-icon fas fa-circle"></i>
                                         <p>
                                             Produk
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('kategori') ?>" class="nav-link">
-                                        <i class="nav-icon fas fa-user"></i>
+                                    <a href="<?= base_url('kategori') ?>" class="nav-link <?= $submenu == 'kategori' ? 'active' : '' ?>">
+                                        <i class="nav-icon fas fa-circle"></i>
                                         <p>
                                             Kategori
                                         </p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('satuan') ?>" class="nav-link">
-                                        <i class="nav-icon fas fa-user"></i>
+                                    <a href="<?= base_url('satuan') ?>" class="nav-link <?= $submenu == 'satuan' ? 'active' : '' ?>">
+                                        <i class="nav-icon fas fa-circle"></i>
                                         <p>
                                             Satuan
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('user') ?>" class="nav-link <?= $submenu == 'user' ? 'active' : '' ?>">
+                                        <i class="nav-icon fas fa-user"></i>
+                                        <p>
+                                            User
                                         </p>
                                     </a>
                                 </li>
@@ -138,10 +145,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?= base_url('setting') ?>" class="nav-link <?= $menu == 'setting' ? 'active' : '' ?>">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>
-                                    Simple Link
+                                    Setting
                                 </p>
                             </a>
                         </li>
@@ -163,8 +170,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#"></a></li>
-                                <li class="breadcrumb-item active"></li>
+                                <li class="breadcrumb-item"><a href="#"><?= $subjudul ?></a></li>
+                                <li class="breadcrumb-item active"><?= $submenu ?></li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->

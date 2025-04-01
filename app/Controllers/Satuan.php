@@ -11,6 +11,9 @@ class Satuan extends BaseController
     {
         $data = [
             'judul' => 'Satuan',
+            'subjudul' => 'satuan',
+            'menu' => 'masterdata',
+            'submenu' => 'satuan',
             'page' => 'v_satuan',
         ];
         return view('v_template', $data);

@@ -6,6 +6,9 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('welcome_message');
+        $data = [
+            'judul' => 'login',
+        ];
+        return view('Auth/v_login', $data);
     }
 }
