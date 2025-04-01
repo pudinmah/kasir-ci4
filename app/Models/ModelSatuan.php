@@ -12,4 +12,10 @@ class ModelSatuan extends Model
             ->get()
             ->getResultArray();
     }
+    
+    
+    public function InsertData($data)
+    {
+       $this->db->table('tbl_satuan')->insert($data);
+    }
 }
