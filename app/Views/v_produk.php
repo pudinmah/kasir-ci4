@@ -177,21 +177,70 @@
                 </div>
 
                 <?php echo form_open('produk/update/' . $value['id_produk']) ?>
-                <div class="modal-body">
-                    <!-- Input Hidden untuk ID Produk -->
-                    <input type="hidden" name="id_produk" value="<?= $value['id_produk'] ?>">
 
+                <!-- Input Hidden untuk ID produk -->
+                <input type="hidden" name="id_produk" value="<?= $value['id_produk'] ?>">
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Kode Produk</label>
+                        <input name="kode_produk" value="<?= $value['kode_produk'] ?>" class="form-control" placeholder="kode_produk" readonly>
+                    </div>
                     <div class="form-group">
                         <label for="">Nama Produk</label>
-                        <input type="text" name="nama_produk" value="<?= $value['nama_produk'] ?>" class="form-control" placeholder="Produk" required>
+                        <input name="nama_produk" value="<?= $value['nama_produk'] ?>" class="form-control" placeholder="nama produk" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Kategori</label>
+                        <select name="id_kategori" class="form-control">
+                            <option value="">--Pilih Kategori--</option>
+                            <?php foreach ($kategori as $key => $k) { ?>
+                                <option value="<?= $k['id_kategori'] ?>" <?= $value['id_kategori'] == $k['id_kategori'] ? 'Selected' : '' ?>>
+                                    <?= $k['nama_kategori'] ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Satuan</label>
+                        <select name="id_satuan" class="form-control">
+                            <option value="">--Pilih Satuan--</option>
+                            <?php foreach ($satuan as $key => $s) { ?>
+                                <option value="<?= $s['id_satuan'] ?>" <?= $value['id_satuan'] == $s['id_satuan'] ? 'Selected' : '' ?>>
+                                    <?= $s['nama_satuan'] ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Harga Beli</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp.</span>
+                            </div>
+                            <input name="harga_beli" id="harga_beli<?= $value['id_produk'] ?>" value="<?= $value['harga_beli'] ?>" class="form-control" placeholder="harga beli" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Harga Jual</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp.</span>
+                            </div>
+                            <input name="harga_jual" id="harga_jual<?= $value['id_produk'] ?>" value="<?= $value['harga_jual'] ?>" class="form-control" placeholder="harga jual" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Stok</label>
+                        <input name="stok" type="number" value="<?= $value['stok'] ?>" class="form-control" placeholder="stok" required>
                     </div>
                 </div>
-
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-warning btn-flat">Save</button>
+                    <button type="submit" class="btn btn-primary btn-flat">Save</button>
                 </div>
-
                 <?php echo form_close() ?>
             </div>
         </div>
@@ -253,4 +302,15 @@
     new AutoNumeric('#harga_jual', {
         decimalPlaces: 0,
     });
+
+    // Edit AutoNumeric
+    <?php foreach ($produk as $key => $value) { ?>
+        new AutoNumeric('#harga_beli<?= $value['id_produk'] ?>', {
+            decimalPlaces: 0,
+        });
+        new AutoNumeric('#harga_jual<?= $value['id_produk'] ?>', {
+            decimalPlaces: 0,
+        });
+    <?php } ?>
+
 </script>

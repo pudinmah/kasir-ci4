@@ -81,22 +81,52 @@ class Produk extends BaseController
 
     public function Update($id_produk)
     {
-        $data = [
-            'id_produk'   => $id_produk, // Pastikan ID diambil dari parameter
-            'nama_produk' => $this->request->getPost('nama_produk')
-        ];
+        if ($this->validate([
+            'id_satuan' => [
+                'label' => 'Satuan',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Belum Dipilih !!',
+                ]
+            ],
+            'id_kategori' => [
+                'label' => 'Kategori',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Belum Dipilih !!',
+                ]
+            ]
+        ])) {
+            $hargabeli = str_replace(",", "", $this->request->getPost('harga_beli'));
+            $hargajual = str_replace(",", "", $this->request->getPost('harga_jual'));
 
-        // dd($data);
+            $data = [
+                'id_produk'   => $id_produk,
+                'nama_produk' => $this->request->getPost('nama_produk'),
+                'id_kategori' => $this->request->getPost('id_kategori'),
+                'id_satuan' => $this->request->getPost('id_satuan'),
+                'harga_beli' => $hargabeli,
+                'harga_jual' => $hargajual,
+                'stok' => $this->request->getPost('stok'),
+            ];
 
-        $this->ModelProduk->UpdateData($data);
-
-        session()->setFlashdata('pesan', 'Data Berhasil DiUpdate !!');
-        return redirect()->to('produk');
+            $this->ModelProduk->UpdateData($data);
+            session()->setFlashdata('pesan', 'Data Berhasil Di Update !!!');
+            return redirect()->to(base_url('produk'));
+        } else {
+            session()->setFlashdata('errors', \Config\Services::validation()->getErrors());
+            return redirect()->to(base_url('produk'))->withInput('validation', \Config\Services::validation());
+        }
     }
 
     public function Delete($id_produk)
     {
-        $this->ModelProduk->DeleteData($id_produk);
+        $data = [
+            'id_produk' => $id_produk
+        ];
+
+        $this->ModelProduk->DeleteData($data);
+
         session()->setFlashdata('pesan', 'Data Berhasil Dihapus!');
         return redirect()->to('produk');
     }
