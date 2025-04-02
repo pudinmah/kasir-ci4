@@ -90,8 +90,55 @@
             <?php echo form_open('produk/add') ?>
 
             <div class="modal-body">
-                <div class="form-group"><label for="">Nama Produk</label>
-                    <input name="nama_produk" class="form-control" placeholder="Produk" required>
+                <div class="form-group">
+                    <label for="">Kode Produk</label>
+                    <input name="kode_produk" class="form-control" placeholder="kode_produk" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Nama Produk</label>
+                    <input name="nama_produk" class="form-control" placeholder="nama produk" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Kategori</label>
+                    <select name="id_kategori" class="form-control">
+                        <option value="">--Pilih Kategori--</option>
+                        <?php foreach ($kategori as $key => $value) { ?>
+                            <option value="<?= $value['id_kategori'] ?>"><?= $value['nama_kategori'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Satuan</label>
+                    <select name="id_satuan" class="form-control">
+                        <option value="">--Pilih Satuan--</option>
+                        <?php foreach ($satuan as $key => $value) { ?>
+                            <option value="<?= $value['id_satuan'] ?>"><?= $value['nama_satuan'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Harga Beli</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp.</span>
+                        </div>
+                        <input name="harga_beli" id="harga_beli" class="form-control" placeholder="harga beli" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Harga Jual</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Rp.</span>
+                        </div>
+                        <input name="harga_jual" id="harga_jual" class="form-control" placeholder="harga jual" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Stok</label>
+                    <input name="stok" class="form-control" placeholder="stok" required>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -184,5 +231,12 @@
             "autoWidth": false,
             "responsive": true,
         });
+    });
+    // AutoNumeric
+    new AutoNumeric('#harga_beli', {
+        decimalPlaces: 0,
+    });
+    new AutoNumeric('#harga_jual', {
+        decimalPlaces: 0,
     });
 </script>
