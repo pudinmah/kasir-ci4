@@ -58,3 +58,69 @@
     </div>
 </div>
 <!-- ./col -->
+
+
+<!-- Info Boxes-->
+<div class="col-md-4">
+    <div class="info-box mb-3 bg-indigo">
+        <span class="info-box-icon"><i class="fas fa-money-bill-wave"></i></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Incom Harian</span>
+            <span class="info-box-number">Rp.5,200</span>
+        </div>
+        <!-- /.info-box-content -->
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="info-box mb-3 bg-primary">
+        <span class="info-box-icon"><i class="fas fa-money-bill-wave"></i></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Incom Bulanan</span>
+            <span class="info-box-number">Rp.5,200</span>
+        </div>
+        <!-- /.info-box-content -->
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="info-box mb-3 bg-fuchsia">
+        <span class="info-box-icon"><i class="fas fa-money-bill-wave"></i></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">Incom Tahunan</span>
+            <span class="info-box-number">Rp.5,200</span>
+        </div>
+        <!-- /.info-box-content -->
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <canvas id="myChart"  width="400" height="100"></canvas>
+</div>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1,
+                borderColor: '#36A2EB',
+                backgroundColor: '#9BD0F5',
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
