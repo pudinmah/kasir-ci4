@@ -22,11 +22,12 @@ class ModelProduk extends Model
     {
         return $this->db->table('tbl_produk')
             ->join('tbl_kategori', 'tbl_kategori.id_kategori = tbl_produk.id_kategori')
-            ->join('tbl_satuan', 'tbl_satuan.id_satuan = tbl_produk.id_satuan') // Perbaikan di sini
+            ->join('tbl_satuan', 'tbl_satuan.id_satuan = tbl_produk.id_satuan')
+            ->orderBy('id_produk', 'DESC')
             ->get()
             ->getResultArray();
     }
-    
+
 
     public function InsertData($data)
     {
@@ -35,11 +36,15 @@ class ModelProduk extends Model
 
     public function UpdateData($data)
     {
-        return $this->update($data['id_produk'], $data);
+        $this->db->table('tbl_produk')
+            ->where('id_produk', $data['id_produk'])
+            ->update($data);
     }
 
-    public function DeleteData($id_produk)
+    public function DeleteData($data)
     {
-        return $this->db->table('tbl_produk')->where('id_produk', $id_produk)->delete();
+        $this->db->table('tbl_produk')
+            ->where('id_produk', $data['id_produk'])
+            ->delete($data);
     }
 }

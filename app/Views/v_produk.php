@@ -23,6 +23,19 @@
             }
             ?>
 
+            <?php
+            $errors = session()->getFlashdata('errors');
+            if (!empty($errors)) { ?>
+                <div class="alert alert-danger alert-dismissible">
+                    <h4>Periksa Lagi Entry Form !!</h4>
+                    <ul>
+                        <?php foreach ($errors as $key => $error) { ?>
+                            <li><?= esc($error) ?></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            <?php } ?>
+
             <table id="example1" class="table table-striped">
                 <thead>
                     <tr class="text-center">
@@ -87,16 +100,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <?php echo form_open('produk/add') ?>
 
             <div class="modal-body">
                 <div class="form-group">
                     <label for="">Kode Produk</label>
-                    <input name="kode_produk" class="form-control" placeholder="kode_produk" required>
+                    <input name="kode_produk" value="<?= old('kode_produk') ?>" class="form-control" placeholder="kode_produk" required>
                 </div>
                 <div class="form-group">
                     <label for="">Nama Produk</label>
-                    <input name="nama_produk" class="form-control" placeholder="nama produk" required>
+                    <input name="nama_produk" value="<?= old('nama_produk') ?>" class="form-control" placeholder="nama produk" required>
                 </div>
 
                 <div class="form-group">
@@ -124,7 +138,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rp.</span>
                         </div>
-                        <input name="harga_beli" id="harga_beli" class="form-control" placeholder="harga beli" required>
+                        <input name="harga_beli" id="harga_beli" value="<?= old('harga_beli') ?>" class="form-control" placeholder="harga beli" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -133,12 +147,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rp.</span>
                         </div>
-                        <input name="harga_jual" id="harga_jual" class="form-control" placeholder="harga jual" required>
+                        <input name="harga_jual" id="harga_jual" value="<?= old('harga_jual') ?>" class="form-control" placeholder="harga jual" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="">Stok</label>
-                    <input name="stok" class="form-control" placeholder="stok" required>
+                    <input name="stok" type="number" value="<?= old('stok') ?>" class="form-control" placeholder="stok" required>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

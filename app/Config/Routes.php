@@ -28,6 +28,12 @@ $routes->post('/kategori/add', 'Kategori::InsertData');
 $routes->post('/kategori/update/(:num)', 'Kategori::Update/$1');
 $routes->get('/kategori/delete/(:num)', 'Kategori::Delete/$1');
 
+// PRODUK
+$routes->get('/produk', 'Produk::index');
+$routes->post('/produk/add', 'Produk::InsertData');
+$routes->post('/produk/update/(:num)', 'Produk::Update/$1');
+$routes->get('/produk/delete/(:num)', 'Produk::Delete/$1');
+
 // USER
 $routes->get('/user', 'User::index');
 $routes->post('/user/add', 'User::InsertData');
