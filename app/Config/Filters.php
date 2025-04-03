@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\FilterAdmin;
 use CodeIgniter\Config\Filters as BaseFilters;
 use CodeIgniter\Filters\Cors;
 use CodeIgniter\Filters\CSRF;
@@ -34,6 +35,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'filteradmin'   => \App\Filters\FilterAdmin::class,
+        'filterkasir'   => \App\Filters\FilterKasir::class,
     ];
 
     /**
@@ -69,13 +72,34 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            'filteradmin' => [
+                'except' => [
+                    'login',
+                    'ceklogin',
+                    'logout',
+                ],
+            ],
+            'filterkasir' => [
+                'except' => [
+                    'login',
+                    'ceklogin',
+                    'logout',
+                ],
+            ],
         ],
+
         'after' => [
-            // 'honeypot',
-            // 'secureheaders',
+            // 'filteradmin' => [
+            //     'except' => [
+            //         
+            //     ],
+            // ],
+            
+            'filterkasir' => [
+                'except' => [
+                    'penjualan',
+                ],
+            ],
         ],
     ];
 

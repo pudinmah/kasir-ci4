@@ -51,7 +51,7 @@ class Auth extends BaseController
                 session()->set('level', $cek_login['level']);
 
                 if ($cek_login['level'] == 1) {
-                    return redirect()->to(base_url('dashboard'));
+                    return redirect()->to(base_url('admin/dashboad'));
                 } else {
                     return redirect()->to(base_url('penjualan'));
                 }

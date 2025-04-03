@@ -5,43 +5,48 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-
 $routes->get('/login', 'Auth::index');
 $routes->post('/ceklogin', 'Auth::CekLogin');
 $routes->get('/logout', 'Home::LogOut');
 
-$routes->get('/user', 'User::index');
+// Group Admin Routes
+$routes->group('admin', function ($routes) {
+    $routes->get('dashboard', 'Admin::index');
+    $routes->get('setting', 'Admin::setting');
+    $routes->post('setting/update', 'Admin::Update');
+});
 
-
-$routes->get('/dashboard', 'Admin::index');
+// Group Penjualan
 $routes->get('/penjualan', 'Penjualan::index');
-$routes->get('/setting', 'Admin::setting');
-$routes->post('/setting/update', 'Admin::Update');
-$routes->get('/produk', 'Produk::index');
-$routes->get('/kategori', 'Kategori::index');
 
-// SATUAN
-$routes->get('/satuan', 'Satuan::index');
-$routes->post('/satuan/add', 'Satuan::InsertData');
-$routes->post('/satuan/update/(:num)', 'Satuan::Update/$1');
-$routes->get('/satuan/delete/(:num)', 'Satuan::Delete/$1');
+// Group Satuan
+$routes->group('satuan', function ($routes) {
+    $routes->get('/', 'Satuan::index');
+    $routes->post('add', 'Satuan::InsertData');
+    $routes->post('update/(:num)', 'Satuan::Update/$1');
+    $routes->delete('delete/(:num)', 'Satuan::Delete/$1');
+});
 
-// KATEGORI
-$routes->get('/kategori', 'Kategori::index');
-$routes->post('/kategori/add', 'Kategori::InsertData');
-$routes->post('/kategori/update/(:num)', 'Kategori::Update/$1');
-$routes->get('/kategori/delete/(:num)', 'Kategori::Delete/$1');
+// Group Kategori
+$routes->group('kategori', function ($routes) {
+    $routes->get('/', 'Kategori::index');
+    $routes->post('add', 'Kategori::InsertData');
+    $routes->post('update/(:num)', 'Kategori::Update/$1');
+    $routes->delete('delete/(:num)', 'Kategori::Delete/$1');
+});
 
-// PRODUK
-$routes->get('/produk', 'Produk::index');
-$routes->post('/produk/add', 'Produk::InsertData');
-$routes->post('/produk/update/(:num)', 'Produk::Update/$1');
-$routes->get('/produk/delete/(:num)', 'Produk::Delete/$1');
+// Group Produk
+$routes->group('produk', function ($routes) {
+    $routes->get('/', 'Produk::index');
+    $routes->post('add', 'Produk::InsertData');
+    $routes->post('update/(:num)', 'Produk::Update/$1');
+    $routes->delete('delete/(:num)', 'Produk::Delete/$1');
+});
 
-// USER
-$routes->get('/user', 'User::index');
-$routes->post('/user/add', 'User::InsertData');
-$routes->post('/user/update/(:num)', 'User::Update/$1');
-$routes->get('/user/delete/(:num)', 'User::Delete/$1');
-
-
+// Group User
+$routes->group('user', function ($routes) {
+    $routes->get('/', 'User::index');
+    $routes->post('add', 'User::InsertData');
+    $routes->post('update/(:num)', 'User::Update/$1');
+    $routes->delete('delete/(:num)', 'User::Delete/$1');
+});

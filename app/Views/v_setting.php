@@ -32,7 +32,7 @@
             <?php } ?>
 
             <!--  -->
-            <?php echo form_open('setting/update') ?>
+            <?php echo form_open('admin/setting/update') ?>
 
             <div class="form-group">
                 <label for="">Nama Toko</label>

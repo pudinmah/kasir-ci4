@@ -50,6 +50,6 @@ class Admin extends BaseController
 
         $this->ModelAdmin->UpdateData($data);
         session()->setFlashdata('pesan', 'Data Berhasil Di Update !!!');
-        return redirect()->to(base_url('setting'));
+        return redirect()->to(base_url('admin/setting'));
     }
 }

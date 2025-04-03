@@ -28,6 +28,7 @@
 
                 <?php
                 $errors = session()->getFlashdata('errors');
+                
                 if (!empty($errors)) { ?>
                     <div class="alert alert-danger alert-dismissible">
                         <ul>
@@ -42,7 +43,7 @@
                 if (session()->getFlashdata('gagal')) {
                     echo '<div class="alert alert-warning alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                  <i class="icon fas fa-check"></i>';
+                  <i class="icon fas fa-exclamation-triangle"></i>';
                     echo session()->getFlashdata('gagal');
                     echo '</div>';
                 }
@@ -50,7 +51,7 @@
 
                 <?php
                 if (session()->getFlashdata('pesan')) {
-                    echo '<div class="alert alert-warning alert-dismissible">
+                    echo '<div class="alert alert-success alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <i class="icon fas fa-check"></i>';
                     echo session()->getFlashdata('pesan');
