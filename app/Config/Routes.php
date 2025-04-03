@@ -13,6 +13,7 @@ $routes->get('/user', 'User::index');
 $routes->get('/', 'Home::index');
 $routes->get('/dashboard', 'Admin::index');
 $routes->get('/setting', 'Admin::setting');
+$routes->post('/setting/update', 'Admin::Update');
 $routes->get('/produk', 'Produk::index');
 $routes->get('/kategori', 'Kategori::index');
 
@@ -39,3 +40,5 @@ $routes->get('/user', 'User::index');
 $routes->post('/user/add', 'User::InsertData');
 $routes->post('/user/update/(:num)', 'User::Update/$1');
 $routes->get('/user/delete/(:num)', 'User::Delete/$1');
+
+
