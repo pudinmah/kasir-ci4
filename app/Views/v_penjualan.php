@@ -35,24 +35,19 @@
 
                 <!-- Right navbar links -->
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-                    <!-- Notifications Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">4</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-header">15 Notifications</span>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="fas fa-envelope mr-2"></i> 4 new messages
-                                <span class="float-right text-muted text-sm">3 mins</span>
+                        <?php if (session()->get('level') == '1') { ?>
+                            <a class="nav-link text-primary" href="<?= base_url('admin/dashboad') ?>">
+                                <i class="fas fa-tachometer-alt "></i> Dashboard
                             </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                        </div>
+                        <?php } else { ?>
+                            <a class="nav-link text-primary" href="<?= base_url('logout') ?>">
+                                <i class="fas fa-sign-in-alt "></i> Logout
+                            </a>
+                        <?php } ?>
+
                     </li>
-                   
+
                 </ul>
             </div>
         </nav>
@@ -71,7 +66,7 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="">No Faktur</label>
-                                            <label class="form-control form-control-lg">3215643</label>
+                                            <label class="form-control form-control-lg text-danger"><?= $no_faktur ?></label>
                                         </div>
                                     </div>
                                     <div class="col-3">
@@ -89,7 +84,7 @@
                                     <div class="col-3">
                                         <div class="form-group">
                                             <label for="">Kasir</label>
-                                            <label class="form-control form-control-lg">Nama Kasir</label>
+                                            <label class="form-control form-control-lg"><?= session()->get('nama_user') ?></label>
                                         </div>
                                     </div>
                                 </div>
