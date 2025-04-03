@@ -98,6 +98,7 @@ class Filters extends BaseFilters
             'filterkasir' => [
                 'except' => [
                     'penjualan',
+                    'penjualan/*',
                 ],
             ],
         ],

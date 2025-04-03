@@ -18,6 +18,7 @@ $routes->group('admin', function ($routes) {
 
 // Group Penjualan
 $routes->get('/penjualan', 'Penjualan::index');
+$routes->post('/penjualan/cekproduk', 'Penjualan::CekProduk');
 
 // Group Satuan
 $routes->group('satuan', function ($routes) {

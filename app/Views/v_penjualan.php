@@ -13,6 +13,18 @@
     <link rel="stylesheet" href="<?= BASE_URL('ADMINLTE') ?>/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= BASE_URL('ADMINLTE') ?>/dist/css/adminlte.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="<?= BASE_URL('ADMINLTE') ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="<?= base_url('AdminLTE') ?>/plugins/jquery/jquery.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="<?= base_url('AdminLTE') ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="<?= base_url('AdminLTE') ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="<?= base_url('AdminLTE') ?>/dist/js/adminlte.min.js"></script>
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -109,9 +121,10 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
+                                    <?php echo form_open() ?>
                                     <div class="row">
                                         <div class="col-2 input-group">
-                                            <input name="kode_produk" class="form-control" placeholder="Barcode/">
+                                            <input name="kode_produk" id="kode_produk" class="form-control" placeholder="Barcode/Kode Produk" autocomplete="off">
                                             <span class="input-group-append">
                                                 <button class="btn btn-primary btn-flat">
                                                     <i class="fas fa-search"></i>
@@ -124,26 +137,28 @@
                                             </span>
                                         </div>
                                         <div class="col-3">
-                                            <input name="nama_produk" class="form-control" placeholder="Nama Pro">
+                                            <input name="nama_produk" class="form-control" placeholder="Nama Pro" readonly>
                                         </div>
                                         <div class="col-1">
-                                            <input name="kategori" class="form-control" placeholder="Kategori">
+                                            <input name="nama_kategori" class="form-control" placeholder="Kategori" readonly>
                                         </div>
                                         <div class="col-1">
-                                            <input name="satuan" class="form-control" placeholder="Satuan">
+                                            <input name="nama_satuan" class="form-control" placeholder="Satuan" readonly>
                                         </div>
                                         <div class="col-1">
-                                            <input name="harga_jual" class="form-control" placeholder="Harga">
+                                            <input name="nama_jual" class="form-control" placeholder="Harga" readonly>
                                         </div>
                                         <div class="col-1">
-                                            <input type="number" min="1" value="1" name="qty" class="form-control text-center" placeholder="QTY">
+                                            <input id="qty" name="qty" type="number" min="1" value="1" class="form-control text-center" placeholder="QTY">
                                         </div>
+
                                         <div class="col-3">
-                                            <button class="btn btn-flat btn-primary"><i class="fas fa-cart-plus"> Add</i></button>
-                                            <button class="btn btn-flat btn-warning"><i class="fas fa-sync"></i> Clear</button>
+                                            <button type="submit" class="btn btn-flat btn-primary"><i class="fas fa-cart-plus"> Add</i></button>
+                                            <button type="reset" class="btn btn-flat btn-warning"><i class="fas fa-sync"></i> Clear</button>
                                             <button class="btn btn-flat btn-success"><i class="fas fa-cash-register"> Pembayaran</i></button>
                                         </div>
                                     </div>
+                                    <?php echo form_close() ?>
                                 </div>
 
                             </div>
@@ -211,14 +226,50 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- REQUIRED SCRIPTS -->
 
-    <!-- jQuery -->
-    <script src="<?= base_url('AdminLTE') ?>/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="<?= base_url('AdminLTE') ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="<?= base_url('AdminLTE') ?>/dist/js/adminlte.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#kode_produk').focus();
+            $('#kode_produk').keydown(function(e) {
+                let kode_produk = $('#kode_produk').val();
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    if (kode_produk == '') {
+                        // alert('kosong');
+                        Swal.fire('Kode Produk Belum Diinput !!!');
+                    } else {
+                        // alert('oke');
+                        CekProduk();
+                    }
+                }
+            });
+
+            function CekProduk() {
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('penjualan/cekproduk') ?>",
+                    data: {
+                        kode_produk: $('#kode_produk').val()
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.nama_produk == '') {
+                            Swal.fire('Kode Produk Tidak Terdaftar Di Database !!!');
+                        } else {
+                            // alert('oke bro');
+                            $('[name="nama_produk"').val(response.nama_produk);
+                            $('[name="nama_kategori"').val(response.nama_kategori);
+                            $('[name="nama_satuan"').val(response.nama_satuan);
+                            $('[name="nama_jual"').val(response.nama_jual);
+                            $('#qty').focus();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+
 </body>
 
 </html>

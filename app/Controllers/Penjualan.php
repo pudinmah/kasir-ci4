@@ -16,8 +16,21 @@ class Penjualan extends BaseController
     {
         $data = [
             'judul' => 'Penjualan',
-            'no_faktur' => $this->ModelPenjualan->NoFaktur(),           
+            'no_faktur' => $this->ModelPenjualan->NoFaktur(),
         ];
         return view('v_penjualan', $data);
+    }
+
+    public function CekProduk()
+    {
+        $kode_produk = $this->request->getPost('kode_produk');
+        $produk = $this->ModelPenjualan->CekProduk($kode_produk);
+        $data = [
+            'nama_produk'   => $produk['nama_produk'] ?? '',
+            'nama_kategori' => $produk['nama_kategori'] ?? '',
+            'nama_satuan'   => $produk['nama_satuan'] ?? '',
+            'harga_jual'    => $produk['harga_jual'] ?? '',
+        ];
+        echo json_encode($data);
     }
 }
