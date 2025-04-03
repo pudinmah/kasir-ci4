@@ -7,11 +7,14 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 $routes->get('/login', 'Auth::index');
+$routes->post('/ceklogin', 'Auth::CekLogin');
+$routes->get('/logout', 'Home::LogOut');
 
 $routes->get('/user', 'User::index');
 
-$routes->get('/', 'Home::index');
+
 $routes->get('/dashboard', 'Admin::index');
+$routes->get('/penjualan', 'Penjualan::index');
 $routes->get('/setting', 'Admin::setting');
 $routes->post('/setting/update', 'Admin::Update');
 $routes->get('/produk', 'Produk::index');

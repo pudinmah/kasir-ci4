@@ -78,8 +78,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-sign-out-alt"></i> Log Out
+                    <a class="nav-link" href="<?= base_url('logout') ?>" >
+                        <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
 
@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <img src="<?= base_url('AdminLTE') ?>/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block"><?= session()->get('nama_user') ?></a>
                     </div>
                 </div>
 
@@ -121,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('dashboard') ?>" class="nav-link">
+                            <a href="<?= base_url('penjualan') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-cash-register"></i>
                                 <p>
                                     Penjualan
