@@ -14,9 +14,8 @@ class Penjualan extends BaseController
             'subjudul' => 'Penjualan',
             'menu' => 'masterdata',
             'submenu' => 'penjualan',
-            'page' => 'v_penjualan',
             // 'satuan' => $this->ModelSatuan->AllData(),
         ];
-        return view('v_template', $data);
+        return view('v_penjualan', $data);
     }
 }
